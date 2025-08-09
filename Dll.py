@@ -116,6 +116,7 @@ class DoublyLinkedList:
         after=temp.prev
         temp.next= None
         temp.prev=None
+        self.length-=1
         return temp
 
     def print_items(self):
