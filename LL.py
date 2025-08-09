@@ -73,6 +73,16 @@ class LinkedList:
             temp = temp.next
         return None
 
+    def get_index(self, value):
+        if value not in self.print_items():
+            return "Element not found in ll"
+        else:
+            temp=self.head
+            index=0
+            while temp.value != value:
+                  temp=temp.next
+                  index+=1
+            return index
 
     def set_value(self, index, value):
         temp=self.get_by_index(index)
@@ -94,6 +104,16 @@ class LinkedList:
         temp.next=new_node
         self.length+=1
         return True
+    def insert_after_value(self, after_which, value):
+        new_node=Node(value)
+        if after_which  not in self.print_items():
+            return "Element not found"
+        else:
+            temp=self.get_by_value(after_which)
+            new_node.next=temp.next
+            temp.next=new_node
+            return new_node
+
     def remove(self, index):
         if 0 > index or index >=self.length:
             return  None
@@ -107,6 +127,21 @@ class LinkedList:
         curr.next=None
         self.length-=1
         return curr
+    def remove_by_value(self,value):
+        index=self.get_index(value)
+        if 0 > index or index >=self.length:
+            return  None
+        if index==0:
+            return self.pop()
+        if index == self.length-1:
+            return self.pop_first()
+        prev=self.get_by_index(index-1)
+        temp=prev.next
+        prev.next=temp.next
+        temp.next=None
+        self.length-=1
+        return temp
+
 
     def reverse(self):
         temp=self.head
@@ -123,19 +158,20 @@ class LinkedList:
 
     def print_items(self):
         temp=self.head
+        all_ll=[]
         while temp is not None:
-            print(f"{temp.value} --->")
+            all_ll.append(temp.value)
             temp=temp.next
-
+        return all_ll
 
 
 
 ll=LinkedList(11)
 ll.append(12)
-ll.prepend(13)
+ll.append(13)
 ll.append(23)
-ll.reverse()
-print(ll.get_by_value(12))
+
+# print(ll.get_by_value(12))
 # print(ll.get(2))
 # print(ll.pop_fir
 # st())
@@ -148,4 +184,6 @@ print(ll.get_by_value(12))
 # print(ll.pop())
 # ll.set_value(1,22)
 # ll.insert(1,31)
+ll.insert_after_value(13,234)
+ll.remove_by_value(12)
 print(ll.print_items())
