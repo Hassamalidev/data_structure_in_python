@@ -14,7 +14,6 @@ class Graph:
             return True
         return f"One of the vertex may not available {v1} or {v2}"
     def remove_edge(self, v1, v2):
-
         if v1 in self.adj_list.keys() and v2 in self.adj_list.keys():
             try:
                 self.adj_list[v1].remove(v2)
